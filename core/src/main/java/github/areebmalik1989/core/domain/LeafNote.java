@@ -1,8 +1,6 @@
-package github.areebmalik1989.core.model;
+package github.areebmalik1989.core.domain;
 
 public class LeafNote {
-
-    private long id;
 
     private String title;
     private String description;
@@ -13,19 +11,10 @@ public class LeafNote {
     public LeafNote() {}
 
     public LeafNote(long id, String title, String description, long createdTime, long modifiedTime) {
-        this.id = id;
         this.title = title;
         this.description = description;
         this.createdTime = createdTime;
         this.modifiedTime = modifiedTime;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -67,24 +56,25 @@ public class LeafNote {
 
         LeafNote leafNote = (LeafNote) o;
 
-        if (getId() != leafNote.getId()) return false;
+        if (getCreatedTime() != leafNote.getCreatedTime()) return false;
+        if (getModifiedTime() != leafNote.getModifiedTime()) return false;
         if (!getTitle().equals(leafNote.getTitle())) return false;
         return getDescription().equals(leafNote.getDescription());
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (getId() ^ (getId() >>> 32));
-        result = 31 * result + getTitle().hashCode();
+        int result = getTitle().hashCode();
         result = 31 * result + getDescription().hashCode();
+        result = 31 * result + (int) (getCreatedTime() ^ (getCreatedTime() >>> 32));
+        result = 31 * result + (int) (getModifiedTime() ^ (getModifiedTime() >>> 32));
         return result;
     }
 
     @Override
     public String toString() {
         return "LeafNote{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
+                "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", createdTime=" + createdTime +
                 ", modifiedTime=" + modifiedTime +
