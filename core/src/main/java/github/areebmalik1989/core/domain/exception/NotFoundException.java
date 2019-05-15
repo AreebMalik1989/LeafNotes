@@ -1,4 +1,6 @@
-package github.areebmalik1989.core.domain;
+package github.areebmalik1989.core.domain.exception;
+
+import github.areebmalik1989.core.domain.exception.DomainException;
 
 public class NotFoundException extends DomainException {
 

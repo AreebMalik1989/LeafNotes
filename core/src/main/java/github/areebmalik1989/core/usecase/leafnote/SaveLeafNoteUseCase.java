@@ -2,70 +2,34 @@ package github.areebmalik1989.core.usecase.leafnote;
 
 import github.areebmalik1989.core.domain.Identity;
 import github.areebmalik1989.core.domain.LeafNote;
-import github.areebmalik1989.core.domain.exception.NotFoundException;
+import github.areebmalik1989.core.domain.exception.NotSavedException;
 import github.areebmalik1989.core.usecase.UseCase;
 
-public class GetLeafNoteByIdUseCase extends UseCase<GetLeafNoteByIdUseCase.InputValues, GetLeafNoteByIdUseCase.OutputValues> {
+public class SaveLeafNoteUseCase extends UseCase<SaveLeafNoteUseCase.InputValues, SaveLeafNoteUseCase.OutputValues> {
 
-    LeafNoteRepository repository;
+    private LeafNoteRepository repository;
 
-    public GetLeafNoteByIdUseCase(LeafNoteRepository repository) {
+    public SaveLeafNoteUseCase(LeafNoteRepository repository) {
         this.repository = repository;
     }
 
     @Override
     public OutputValues execute(InputValues input) {
 
-        Identity id = input.getId();
+        LeafNote leafNote = input.getLeafNote();
 
         return repository
-                .getById(id)
+                .saveLeafNote(leafNote)
                 .map(OutputValues::new)
-                .orElseThrow(() -> new NotFoundException("LeafNote %s not found", id.getId()));
+                .orElseThrow(() -> new NotSavedException("LeafNote %s not saved", leafNote));
     }
 
     // expanded lombok @Value
     public static class InputValues implements UseCase.InputValues {
 
-        private final Identity id;
-
-        public InputValues(Identity id) {
-            this.id = id;
-        }
-
-        public Identity getId() {
-            return id;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof InputValues)) return false;
-
-            InputValues that = (InputValues) o;
-
-            return getId().equals(that.getId());
-        }
-
-        @Override
-        public int hashCode() {
-            return getId().hashCode();
-        }
-
-        @Override
-        public String toString() {
-            return "InputValues{" +
-                    "id=" + id +
-                    '}';
-        }
-    }
-
-    // expanded lombok @Value
-    public static class OutputValues implements UseCase.OutputValues {
-
         private final LeafNote leafNote;
 
-        public OutputValues(LeafNote leafNote) {
+        public InputValues(LeafNote leafNote) {
             this.leafNote = leafNote;
         }
 
@@ -76,9 +40,9 @@ public class GetLeafNoteByIdUseCase extends UseCase<GetLeafNoteByIdUseCase.Input
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
-            if (!(o instanceof OutputValues)) return false;
+            if (!(o instanceof InputValues)) return false;
 
-            OutputValues that = (OutputValues) o;
+            InputValues that = (InputValues) o;
 
             return getLeafNote().equals(that.getLeafNote());
         }
@@ -90,8 +54,44 @@ public class GetLeafNoteByIdUseCase extends UseCase<GetLeafNoteByIdUseCase.Input
 
         @Override
         public String toString() {
-            return "OutputValues{" +
+            return "InputValues{" +
                     "leafNote=" + leafNote +
+                    '}';
+        }
+    }
+
+    // expanded lombok @Value
+    public static class OutputValues implements UseCase.OutputValues {
+
+        private final Identity id;
+
+        public OutputValues(Identity id) {
+            this.id = id;
+        }
+
+        public Identity getId() {
+            return id;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof OutputValues)) return false;
+
+            OutputValues that = (OutputValues) o;
+
+            return getId().equals(that.getId());
+        }
+
+        @Override
+        public int hashCode() {
+            return getId().hashCode();
+        }
+
+        @Override
+        public String toString() {
+            return "OutputValues{" +
+                    "id=" + id +
                     '}';
         }
     }
