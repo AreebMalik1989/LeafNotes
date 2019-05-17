@@ -7,9 +7,9 @@ import github.areebmalik1989.core.usecase.UseCase;
 
 public class GetLeafNoteByIdUseCase extends UseCase<GetLeafNoteByIdUseCase.InputValues, GetLeafNoteByIdUseCase.OutputValues> {
 
-    LeafNoteRepository repository;
+    ILeafNoteRepository repository;
 
-    public GetLeafNoteByIdUseCase(LeafNoteRepository repository) {
+    public GetLeafNoteByIdUseCase(ILeafNoteRepository repository) {
         this.repository = repository;
     }
 

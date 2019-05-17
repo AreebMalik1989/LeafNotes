@@ -7,9 +7,9 @@ import github.areebmalik1989.core.usecase.UseCase;
 
 public class SaveLeafNoteUseCase extends UseCase<SaveLeafNoteUseCase.InputValues, SaveLeafNoteUseCase.OutputValues> {
 
-    private LeafNoteRepository repository;
+    private ILeafNoteRepository repository;
 
-    public SaveLeafNoteUseCase(LeafNoteRepository repository) {
+    public SaveLeafNoteUseCase(ILeafNoteRepository repository) {
         this.repository = repository;
     }
 

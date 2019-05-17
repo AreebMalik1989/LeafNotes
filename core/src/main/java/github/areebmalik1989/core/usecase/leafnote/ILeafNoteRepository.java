@@ -6,7 +6,7 @@ import github.areebmalik1989.core.domain.LeafNote;
 import java.util.List;
 import java.util.Optional;
 
-public interface LeafNoteRepository {
+public interface ILeafNoteRepository {
 
     List<LeafNote> getAll();
     List<LeafNote> searchByTitle(String searchText);

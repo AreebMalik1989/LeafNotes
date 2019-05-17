@@ -3,7 +3,7 @@ package github.areebmalik1989.core.usecase;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
-public interface UseCaseExecutor {
+public interface IUseCaseExecutor {
 
     <RX, I extends UseCase.InputValues, O extends UseCase.OutputValues> CompletableFuture<RX> execute(
             UseCase<I, O> useCase,

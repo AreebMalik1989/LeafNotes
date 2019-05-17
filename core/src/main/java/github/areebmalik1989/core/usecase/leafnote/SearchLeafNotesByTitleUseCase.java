@@ -7,9 +7,9 @@ import java.util.List;
 
 public class SearchLeafNotesByTitleUseCase extends UseCase<SearchLeafNotesByTitleUseCase.InputValues, SearchLeafNotesByTitleUseCase.OutputValues> {
 
-    LeafNoteRepository repository;
+    ILeafNoteRepository repository;
 
-    public SearchLeafNotesByTitleUseCase(LeafNoteRepository repository) {
+    public SearchLeafNotesByTitleUseCase(ILeafNoteRepository repository) {
         this.repository = repository;
     }
 

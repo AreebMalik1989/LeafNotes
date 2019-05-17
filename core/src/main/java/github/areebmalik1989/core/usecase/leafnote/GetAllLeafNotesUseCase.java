@@ -7,9 +7,9 @@ import java.util.List;
 
 public class GetAllLeafNotesUseCase extends UseCase<GetAllLeafNotesUseCase.InputValues, GetAllLeafNotesUseCase.OutputValues> {
 
-    private LeafNoteRepository repository;
+    private ILeafNoteRepository repository;
 
-    public GetAllLeafNotesUseCase(LeafNoteRepository repository) {
+    public GetAllLeafNotesUseCase(ILeafNoteRepository repository) {
         this.repository = repository;
     }
 
