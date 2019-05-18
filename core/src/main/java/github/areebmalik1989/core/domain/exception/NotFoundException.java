@@ -1,7 +1,5 @@
 package github.areebmalik1989.core.domain.exception;
 
-import github.areebmalik1989.core.domain.exception.DomainException;
-
 public class NotFoundException extends DomainException {
 
     public NotFoundException(String message) {

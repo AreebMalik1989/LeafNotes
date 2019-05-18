@@ -18,10 +18,13 @@ public class SaveLeafNoteUseCase extends UseCase<SaveLeafNoteUseCase.InputValues
 
         LeafNote leafNote = input.getLeafNote();
 
-        return repository
-                .saveLeafNote(leafNote)
-                .map(OutputValues::new)
-                .orElseThrow(() -> new NotSavedException("LeafNote %s not saved", leafNote));
+        Identity id = repository.saveLeafNote(leafNote);
+
+        if(id != null) {
+            return new OutputValues(id);
+        } else {
+            throw new NotSavedException("LeafNote %s not saved", leafNote);
+        }
     }
 
     // expanded lombok @Value

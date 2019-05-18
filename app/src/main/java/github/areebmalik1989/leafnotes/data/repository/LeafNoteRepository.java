@@ -8,11 +8,10 @@ import github.areebmalik1989.leafnotes.data.entity.LeafNoteData;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 public class LeafNoteRepository implements ILeafNoteRepository {
 
-    LinkedList<LeafNoteData> repository = new LinkedList<>();
+    private static final LinkedList<LeafNoteData> repository = new LinkedList<>();
 
     @Override
     public List<LeafNote> getAll() {
@@ -42,20 +41,21 @@ public class LeafNoteRepository implements ILeafNoteRepository {
     }
 
     @Override
-    public Optional<LeafNote> getById(Identity id) {
+    public LeafNote getById(Identity id) {
 
         for(LeafNoteData leafNoteData: repository) {
-            if (leafNoteData.getId() == id.getId()) return Optional.of(leafNoteData.fromThis());
+            if (leafNoteData.getId() == id.getId())
+                return leafNoteData.fromThis();
         }
 
-        return Optional.empty();
+        return null;
     }
 
     @Override
-    public Optional<Identity> saveLeafNote(LeafNote leafNote) {
+    public Identity saveLeafNote(LeafNote leafNote) {
 
         repository.add(LeafNoteData.from(leafNote));
 
-        return Optional.of(leafNote.getId());
+        return leafNote.getId();
     }
 }
