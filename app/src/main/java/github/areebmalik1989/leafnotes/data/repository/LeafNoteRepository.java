@@ -3,6 +3,7 @@ package github.areebmalik1989.leafnotes.data.repository;
 import github.areebmalik1989.core.domain.Identity;
 import github.areebmalik1989.core.domain.LeafNote;
 import github.areebmalik1989.core.usecase.leafnote.ILeafNoteRepository;
+import github.areebmalik1989.leafnotes.data.entity.LeafNoteData;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -11,11 +12,18 @@ import java.util.Optional;
 
 public class LeafNoteRepository implements ILeafNoteRepository {
 
-    LinkedList<LeafNote> repository = new LinkedList<>();
+    LinkedList<LeafNoteData> repository = new LinkedList<>();
 
     @Override
     public List<LeafNote> getAll() {
-        return repository;
+
+        List<LeafNote> list = new ArrayList<>();
+
+        for(LeafNoteData leafNoteData : repository) {
+            list.add(leafNoteData.fromThis());
+        }
+
+        return list;
     }
 
     @Override
@@ -23,10 +31,10 @@ public class LeafNoteRepository implements ILeafNoteRepository {
 
         List<LeafNote> leafNotes = new ArrayList<>();
 
-        for(LeafNote leafNote : repository) {
+        for(LeafNoteData leafNoteData : repository) {
 
-            if(leafNote.getTitle().equals(searchText)) {
-                leafNotes.add(leafNote);
+            if(leafNoteData.getTitle().equals(searchText)) {
+                leafNotes.add(leafNoteData.fromThis());
             }
         }
 
@@ -36,8 +44,8 @@ public class LeafNoteRepository implements ILeafNoteRepository {
     @Override
     public Optional<LeafNote> getById(Identity id) {
 
-        for(LeafNote leafNote : repository) {
-            if (leafNote.getId().equals(id)) return Optional.of(leafNote);
+        for(LeafNoteData leafNoteData: repository) {
+            if (leafNoteData.getId() == id.getId()) return Optional.of(leafNoteData.fromThis());
         }
 
         return Optional.empty();
@@ -46,7 +54,7 @@ public class LeafNoteRepository implements ILeafNoteRepository {
     @Override
     public Optional<Identity> saveLeafNote(LeafNote leafNote) {
 
-        repository.add(leafNote);
+        repository.add(LeafNoteData.from(leafNote));
 
         return Optional.of(leafNote.getId());
     }

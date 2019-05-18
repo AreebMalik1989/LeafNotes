@@ -16,7 +16,7 @@ class MainApp : Application() {
 
         private val useCaseExecutor : UseCaseExecutor = UseCaseExecutor()
 
-        private val repository : LeafNoteRepository = LeafNoteRepository()
+        val repository : LeafNoteRepository = LeafNoteRepository()
 
         private val getAllLeafNotesUseCase : GetAllLeafNotesUseCase = Module.getAllLeafNotesUseCase(repository)
         private val getLeafNoteByIdUseCase : GetLeafNoteByIdUseCase = Module.getLeafNoteByIdUseCase(repository)
