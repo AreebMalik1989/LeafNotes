@@ -3,18 +3,19 @@ package github.areebmalik1989.leafnotes.data.repository;
 import github.areebmalik1989.core.domain.Identity;
 import github.areebmalik1989.core.domain.LeafNote;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class LeafNoteRepositoryTest {
 
-    LeafNoteRepository repository;
-    LeafNote leafNote1;
-    LeafNote leafNote2;
+    private static LeafNoteRepository repository;
+    private static LeafNote leafNote1;
+    private static LeafNote leafNote2;
 
-    @Before
-    public void setUp(){
+    @BeforeClass
+    public static void setUp(){
 
         repository = new LeafNoteRepository();
 
@@ -26,26 +27,26 @@ public class LeafNoteRepositoryTest {
     }
 
     @Test
-    public void getAll() {
+    public void testGetAll() {
 
-        assertEquals("leafNote missing", repository.getAll().size(), 2);
+        assertEquals("leafNote missing",2 , repository.getAll().size());
     }
 
     @Test
-    public void searchByTitle() {
+    public void testSearchByTitle() {
 
         assertEquals("leafNote missing", repository.searchByTitle("Title1").get(0), leafNote1);
 
     }
 
     @Test
-    public void getById() {
+    public void testGetById() {
 
-        assertEquals("leafNote missing", repository.getById(new Identity(1)).get(), leafNote1);
+        assertEquals("leafNote missing", repository.getById(new Identity(1)), leafNote1);
     }
 
     @Test
-    public void saveLeafNote() {
+    public void testSaveLeafNote() {
 
     }
 }

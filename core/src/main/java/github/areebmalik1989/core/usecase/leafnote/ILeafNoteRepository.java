@@ -4,12 +4,11 @@ import github.areebmalik1989.core.domain.Identity;
 import github.areebmalik1989.core.domain.LeafNote;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ILeafNoteRepository {
 
     List<LeafNote> getAll();
     List<LeafNote> searchByTitle(String searchText);
-    Optional<LeafNote> getById(Identity id);
-    Optional<Identity> saveLeafNote(LeafNote leafNote);
+    LeafNote getById(Identity id);
+    Identity saveLeafNote(LeafNote leafNote);
 }

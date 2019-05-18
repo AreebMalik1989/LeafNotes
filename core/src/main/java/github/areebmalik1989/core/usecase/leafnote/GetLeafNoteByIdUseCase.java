@@ -18,10 +18,13 @@ public class GetLeafNoteByIdUseCase extends UseCase<GetLeafNoteByIdUseCase.Input
 
         Identity id = input.getId();
 
-        return repository
-                .getById(id)
-                .map(OutputValues::new)
-                .orElseThrow(() -> new NotFoundException("LeafNote %s not found", id.getId()));
+        LeafNote leafNote = repository.getById(id);
+
+        if(leafNote != null) {
+            return new OutputValues(leafNote);
+        } else {
+            throw new NotFoundException("LeafNote %s not found", id);
+        }
     }
 
     // expanded lombok @Value

@@ -1,11 +1,9 @@
 package github.areebmalik1989.leafnotes.presenter.entities;
 
-
-import github.areebmalik1989.core.domain.Identity;
 import github.areebmalik1989.core.domain.LeafNote;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static github.areebmalik1989.leafnotes.data.entity.IdConverter.convertId;
 
@@ -71,9 +69,11 @@ public class LeafNoteResponse {
     }
 
     public static List<LeafNoteResponse> from(List<LeafNote> leafNotes) {
-        return leafNotes
-                .parallelStream()
-                .map(LeafNoteResponse::from)
-                .collect(Collectors.toList());
+
+        List<LeafNoteResponse> list = new ArrayList<>();
+        for(LeafNote leafNote : leafNotes) {
+            list.add(from(leafNote));
+        }
+        return list;
     }
 }
