@@ -1,4 +1,4 @@
-package github.areebmalik1989.leafnotes.presenter.usecase;
+package github.areebmalik1989.leafnotes.presenter.usecase.leafnote;
 
 import github.areebmalik1989.core.domain.Identity;
 import github.areebmalik1989.core.usecase.leafnote.DeleteLeafNoteByIdUseCase;
