@@ -58,4 +58,19 @@ public class LeafNoteRepository implements ILeafNoteRepository {
 
         return leafNote.getId();
     }
+
+    @Override
+    public boolean deleteLeafNote(Identity id) {
+
+        boolean success = false;
+
+        for(LeafNoteData leafNoteData : repository) {
+            if(leafNoteData.getId() == id.getId()) {
+                repository.remove(leafNoteData);
+                success = true;
+            }
+        }
+
+        return success;
+    }
 }

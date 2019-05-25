@@ -11,4 +11,5 @@ public interface ILeafNoteRepository {
     List<LeafNote> searchByTitle(String searchText);
     LeafNote getById(Identity id);
     Identity saveLeafNote(LeafNote leafNote);
+    boolean deleteLeafNote(Identity id);
 }
