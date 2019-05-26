@@ -7,6 +7,10 @@ class LeafNotes : Application() {
     companion object {
 
         private lateinit var app : LeafNotes
+
+        fun getApp() : LeafNotes{
+            return app
+        }
     }
 
     override fun onCreate() {
@@ -14,9 +18,5 @@ class LeafNotes : Application() {
         super.onCreate()
 
         app = this
-    }
-
-    fun getApp() : LeafNotes{
-        return app
     }
 }
