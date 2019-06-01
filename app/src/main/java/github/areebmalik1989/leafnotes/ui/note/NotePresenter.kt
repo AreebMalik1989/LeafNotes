@@ -7,7 +7,8 @@ import github.areebmalik1989.core.usecase.leafnote.SaveLeafNoteUseCase
 import github.areebmalik1989.leafnotes.data.repository.LeafNoteRepository
 import github.areebmalik1989.leafnotes.presenter.usecase.UseCaseExecutor
 
-class NotePresenter(val view: NoteContract.View) : NoteContract.Presenter {
+class NotePresenter(val view : NoteContract.View,
+                    val id : Identity) : NoteContract.Presenter {
 
     lateinit var leafNoteRepository : LeafNoteRepository
     lateinit var saveLeafNoteUseCase : SaveLeafNoteUseCase
@@ -39,19 +40,18 @@ class NotePresenter(val view: NoteContract.View) : NoteContract.Presenter {
             note.description = view.getBodyText()
         }
 
-        if(view.getNoteId() == -1L) {
+        if(id.id == -1L) {
             note.id = Identity(IdGenerator.generate())
-            view.setNoteId(note.id.id)
         } else {
-            note.id = Identity(view.getNoteId())
+            note.id = id
         }
 
         var input = SaveLeafNoteUseCase.InputValues(note)
 
         useCaseExecutor.executeAsync(saveLeafNoteUseCase, input,
             UseCaseExecutor.Callback<SaveLeafNoteUseCase.OutputValues> {
-            var id = it.id.id
-            view.showSuccess("Saved " + id)
+
+            view.showSuccess("Saved " + it.id.id)
         })
     }
 

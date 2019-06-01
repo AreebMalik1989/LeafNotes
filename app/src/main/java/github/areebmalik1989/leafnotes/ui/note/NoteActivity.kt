@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
+import github.areebmalik1989.core.domain.Identity
 import github.areebmalik1989.leafnotes.R
 import github.areebmalik1989.leafnotes.ui.BaseActivity
 
@@ -17,7 +18,9 @@ class NoteActivity : BaseActivity() {
 
         setTitle(R.string.edit_note)
 
-        presenter = NotePresenter(fragment)
+        val id = intent.getLongExtra(NoteConstants.idKey, -1L)
+
+        presenter = NotePresenter(fragment, Identity(id))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

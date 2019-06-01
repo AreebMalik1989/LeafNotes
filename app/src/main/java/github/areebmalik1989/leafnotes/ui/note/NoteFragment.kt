@@ -17,7 +17,6 @@ class NoteFragment : BaseFragment(), NoteContract.View{
 
     private lateinit var title : EditText
     private lateinit var body : EditText
-    private var noteId : Long = -1
 
     companion object {
 
@@ -44,14 +43,6 @@ class NoteFragment : BaseFragment(), NoteContract.View{
 
     override fun setPresenter(presenter: NoteContract.Presenter) {
         this.presenter = presenter
-    }
-
-    override fun getNoteId(): Long {
-        return noteId
-    }
-
-    override fun setNoteId(noteId: Long) {
-        this.noteId = noteId
     }
 
     override fun getTitleText() : String {
