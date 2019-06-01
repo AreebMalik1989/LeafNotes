@@ -16,5 +16,6 @@ class NoteContract {
 
     interface Presenter : BasePresenter {
         fun saveNote()
+        fun deleteNote()
     }
 }

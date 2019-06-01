@@ -10,7 +10,7 @@ public class UseCaseExecutor implements IUsecaseExecutor {
         return useCase.execute(input);
     }
 
-    public <I extends UseCase.InputValues, O extends UseCase.OutputValues> void executeAsync(UseCase<I, O> useCase, I input, Callback callback) {
+    public <I extends UseCase.InputValues, O extends UseCase.OutputValues> void execute(UseCase<I, O> useCase, I input, Callback callback) {
         new Thread(() -> {
             O output = execute(useCase, input);
             callback.onComplete(output);

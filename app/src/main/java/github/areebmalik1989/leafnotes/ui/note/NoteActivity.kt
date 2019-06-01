@@ -20,7 +20,7 @@ class NoteActivity : BaseActivity() {
 
         val id = intent.getLongExtra(NoteConstants.idKey, -1L)
 
-        presenter = NotePresenter(fragment, Identity(id))
+        presenter = NotePresenter(this, fragment, Identity(id))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -31,10 +31,16 @@ class NoteActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
         when(item?.itemId) {
+
             R.id.save_note -> {
                 presenter.saveNote()
             }
+
+            R.id.delete_note -> {
+                presenter.deleteNote()
+            }
         }
+
         return super.onOptionsItemSelected(item)
     }
 
