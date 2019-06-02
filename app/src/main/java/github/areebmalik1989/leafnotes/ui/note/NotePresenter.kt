@@ -7,6 +7,7 @@ import github.areebmalik1989.core.domain.LeafNote
 import github.areebmalik1989.core.usecase.leafnote.DeleteLeafNoteByIdUseCase
 import github.areebmalik1989.core.usecase.leafnote.GetLeafNoteByIdUseCase
 import github.areebmalik1989.core.usecase.leafnote.SaveLeafNoteUseCase
+import github.areebmalik1989.core.usecase.leafnote.UpdateLeafNoteUseCase
 import github.areebmalik1989.leafnotes.data.repository.LeafNoteRepository
 import github.areebmalik1989.leafnotes.presenter.usecase.UseCaseExecutor
 
@@ -16,6 +17,7 @@ class NotePresenter(val activity: AppCompatActivity,
 
     lateinit var leafNoteRepository : LeafNoteRepository
     lateinit var saveLeafNoteUseCase : SaveLeafNoteUseCase
+    lateinit var updateLeafNoteUseCase : UpdateLeafNoteUseCase
     lateinit var deleteLeafNoteByIdUseCase: DeleteLeafNoteByIdUseCase
     lateinit var getLeafNoteByIdUseCase: GetLeafNoteByIdUseCase
     lateinit var useCaseExecutor : UseCaseExecutor
@@ -27,8 +29,9 @@ class NotePresenter(val activity: AppCompatActivity,
     }
 
     override fun start() {
-        leafNoteRepository = LeafNoteRepository()
+        leafNoteRepository = LeafNoteRepository(activity)
         saveLeafNoteUseCase = SaveLeafNoteUseCase(leafNoteRepository)
+        updateLeafNoteUseCase = UpdateLeafNoteUseCase(leafNoteRepository)
         deleteLeafNoteByIdUseCase = DeleteLeafNoteByIdUseCase(leafNoteRepository)
         getLeafNoteByIdUseCase = GetLeafNoteByIdUseCase(leafNoteRepository)
         useCaseExecutor = UseCaseExecutor()
@@ -54,18 +57,27 @@ class NotePresenter(val activity: AppCompatActivity,
         }
 
         if(id.id == -1L) {
-            note.id = Identity(IdGenerator.generate())
+
+            var input = SaveLeafNoteUseCase.InputValues(note)
+
+            useCaseExecutor.execute(saveLeafNoteUseCase, input,
+                UseCaseExecutor.Callback<SaveLeafNoteUseCase.OutputValues> {
+                    note.id = it.id
+                    view.showSuccess("Saved")
+                })
+
         } else {
-            note.id = id
+
+            var input = UpdateLeafNoteUseCase.InputValues(note)
+
+            useCaseExecutor.execute(updateLeafNoteUseCase, input,
+                object : UseCaseExecutor.Callback<UpdateLeafNoteUseCase.OutputValues> {
+                    override fun onComplete(response: UpdateLeafNoteUseCase.OutputValues?) {
+                        view.showSuccess("Updated")
+                    }
+
+                })
         }
-
-        var input = SaveLeafNoteUseCase.InputValues(note)
-
-        useCaseExecutor.execute(saveLeafNoteUseCase, input,
-            UseCaseExecutor.Callback<SaveLeafNoteUseCase.OutputValues> {
-
-            view.showSuccess("""Saved ${it.id.id}""")
-        })
     }
 
     override fun deleteNote() {
@@ -81,9 +93,9 @@ class NotePresenter(val activity: AppCompatActivity,
         useCaseExecutor.execute(deleteLeafNoteByIdUseCase, input,
             UseCaseExecutor.Callback<DeleteLeafNoteByIdUseCase.OutputValues> {
                 if(it.isSuccess) {
-                    view.showSuccess("Deleted ${note.id.id}")
+                    view.showSuccess("Deleted")
                 } else {
-                    view.showWarning("Error deleting ${note.id.id}")
+                    view.showWarning("Error Deleting Note")
                 }
             })
 

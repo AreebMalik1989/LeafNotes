@@ -1,7 +1,7 @@
 package github.areebmalik1989.leafnotes.presenter.usecase;
 
 import github.areebmalik1989.core.usecase.UseCase;
-import github.areebmalik1989.core.usecase.leafnote.IUsecaseExecutor;
+import github.areebmalik1989.core.usecase.IUsecaseExecutor;
 
 public class UseCaseExecutor implements IUsecaseExecutor {
 

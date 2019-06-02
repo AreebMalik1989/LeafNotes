@@ -1,6 +1,4 @@
-package github.areebmalik1989.core.usecase.leafnote;
-
-import github.areebmalik1989.core.usecase.UseCase;
+package github.areebmalik1989.core.usecase;
 
 public interface IUsecaseExecutor {
 

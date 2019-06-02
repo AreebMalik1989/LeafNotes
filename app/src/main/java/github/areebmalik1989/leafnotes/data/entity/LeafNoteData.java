@@ -19,6 +19,11 @@ public class LeafNoteData {
         this.description = description;
     }
 
+    public LeafNoteData(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
     public long getId() {
         return id;
     }
