@@ -7,4 +7,11 @@
             android:icon="@drawable/ic_save_white_192dp"
             app:showAsAction="ifRoom"/>
 
+    <item
+            android:id="@+id/delete_note"
+            android:title="@string/delete_note"
+            android:icon="@drawable/ic_delete_white_192dp"
+            app:showAsAction="ifRoom"/>
+
+
 </menu>

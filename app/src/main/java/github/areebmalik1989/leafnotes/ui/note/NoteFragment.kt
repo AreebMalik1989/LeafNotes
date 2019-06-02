@@ -17,7 +17,6 @@ class NoteFragment : BaseFragment(), NoteContract.View{
 
     private lateinit var title : EditText
     private lateinit var body : EditText
-    private var noteId : Long = -1
 
     companion object {
 
@@ -46,20 +45,12 @@ class NoteFragment : BaseFragment(), NoteContract.View{
         this.presenter = presenter
     }
 
-    override fun getNoteId(): Long {
-        return noteId
-    }
-
-    override fun setNoteId(noteId: Long) {
-        this.noteId = noteId
-    }
-
     override fun getTitleText() : String {
         return title.text.toString()
     }
 
     override fun setTitleText(titleText: String) {
-        title.setText(titleText)
+        handler.post {title.setText(titleText)}
     }
 
     override fun getBodyText() : String {
@@ -67,14 +58,14 @@ class NoteFragment : BaseFragment(), NoteContract.View{
     }
 
     override fun setBodytext(bodyText: String) {
-        body.setText(bodyText)
+        handler.post {body.setText(bodyText)}
     }
 
     override fun showWarning(warning : String) {
-        handler.post({Toast.makeText(activity!!.applicationContext, warning, Toast.LENGTH_SHORT).show()})
+        handler.post {Toast.makeText(activity!!.applicationContext, warning, Toast.LENGTH_SHORT).show()}
     }
 
     override fun showSuccess(success: String) {
-        handler.post({Toast.makeText(activity!!.applicationContext, success, Toast.LENGTH_SHORT).show()})
+        handler.post {Toast.makeText(activity!!.applicationContext, success, Toast.LENGTH_SHORT).show()}
     }
 }

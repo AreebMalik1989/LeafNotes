@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
+import github.areebmalik1989.core.domain.Identity
 import github.areebmalik1989.leafnotes.R
 import github.areebmalik1989.leafnotes.ui.BaseActivity
 
@@ -17,7 +18,9 @@ class NoteActivity : BaseActivity() {
 
         setTitle(R.string.edit_note)
 
-        presenter = NotePresenter(fragment)
+        val id = intent.getLongExtra(NoteConstants.ID_KEY, -1L)
+
+        presenter = NotePresenter(this, fragment, Identity(id))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -28,10 +31,16 @@ class NoteActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
         when(item?.itemId) {
+
             R.id.save_note -> {
                 presenter.saveNote()
             }
+
+            R.id.delete_note -> {
+                presenter.deleteNote()
+            }
         }
+
         return super.onOptionsItemSelected(item)
     }
 
