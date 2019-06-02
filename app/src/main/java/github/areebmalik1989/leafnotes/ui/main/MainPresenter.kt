@@ -32,7 +32,7 @@ class MainPresenter(val activity: AppCompatActivity, val view: MainContract.View
 
         view.showProgress()
 
-        leafNoteRepository = LeafNoteRepository()
+        leafNoteRepository = LeafNoteRepository(activity)
         getAllLeafNotesUseCase = GetAllLeafNotesUseCase(leafNoteRepository)
         useCaseExecutor = UseCaseExecutor()
 
