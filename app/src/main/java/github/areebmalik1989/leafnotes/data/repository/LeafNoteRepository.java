@@ -124,12 +124,12 @@ public class LeafNoteRepository implements ILeafNoteRepository {
         values.put(DbHelper.COL_NOTE_TITLE, leafNoteData.getTitle());
         values.put(DbHelper.COL_NOTE_DESCRIPTION, leafNoteData.getDescription());
 
-        database.insert(DbHelper.TABLE_NAME, null, values);
+        long id = database.insert(DbHelper.TABLE_NAME, null, values);
 
         Log.i(TAG, "Note Added");
         database.close();
 
-        return leafNote.getId();
+        return new Identity(id);
     }
 
     @Override
