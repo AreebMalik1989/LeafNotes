@@ -1,5 +1,6 @@
 package github.areebmalik1989.leafnotes.ui.note
 
+import github.areebmalik1989.core.domain.Identity
 import github.areebmalik1989.leafnotes.ui.BasePresenter
 import github.areebmalik1989.leafnotes.ui.BaseView
 
@@ -17,5 +18,6 @@ class NoteContract {
     interface Presenter : BasePresenter {
         fun saveNote()
         fun deleteNote()
+        fun showNote(identity: Identity)
     }
 }

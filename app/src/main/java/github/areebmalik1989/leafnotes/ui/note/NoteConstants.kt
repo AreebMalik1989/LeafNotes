@@ -4,6 +4,6 @@ class NoteConstants {
 
     companion object {
 
-        public val idKey = "IdKey"
+        public val ID_KEY = "IdKey"
     }
 }

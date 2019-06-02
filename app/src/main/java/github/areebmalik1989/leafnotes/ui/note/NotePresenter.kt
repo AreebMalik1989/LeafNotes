@@ -5,6 +5,7 @@ import github.areebmalik1989.core.domain.IdGenerator
 import github.areebmalik1989.core.domain.Identity
 import github.areebmalik1989.core.domain.LeafNote
 import github.areebmalik1989.core.usecase.leafnote.DeleteLeafNoteByIdUseCase
+import github.areebmalik1989.core.usecase.leafnote.GetLeafNoteByIdUseCase
 import github.areebmalik1989.core.usecase.leafnote.SaveLeafNoteUseCase
 import github.areebmalik1989.leafnotes.data.repository.LeafNoteRepository
 import github.areebmalik1989.leafnotes.presenter.usecase.UseCaseExecutor
@@ -16,6 +17,7 @@ class NotePresenter(val activity: AppCompatActivity,
     lateinit var leafNoteRepository : LeafNoteRepository
     lateinit var saveLeafNoteUseCase : SaveLeafNoteUseCase
     lateinit var deleteLeafNoteByIdUseCase: DeleteLeafNoteByIdUseCase
+    lateinit var getLeafNoteByIdUseCase: GetLeafNoteByIdUseCase
     lateinit var useCaseExecutor : UseCaseExecutor
     var note = LeafNote()
 
@@ -28,7 +30,12 @@ class NotePresenter(val activity: AppCompatActivity,
         leafNoteRepository = LeafNoteRepository()
         saveLeafNoteUseCase = SaveLeafNoteUseCase(leafNoteRepository)
         deleteLeafNoteByIdUseCase = DeleteLeafNoteByIdUseCase(leafNoteRepository)
+        getLeafNoteByIdUseCase = GetLeafNoteByIdUseCase(leafNoteRepository)
         useCaseExecutor = UseCaseExecutor()
+
+        if(note.id.id != -1L) {
+            showNote(note.id)
+        }
     }
 
     override fun saveNote() {
@@ -81,6 +88,18 @@ class NotePresenter(val activity: AppCompatActivity,
             })
 
         activity.finish()
+    }
+
+    override fun showNote(identity: Identity) {
+
+        val input = GetLeafNoteByIdUseCase.InputValues(identity)
+        useCaseExecutor.execute(getLeafNoteByIdUseCase, input, object : UseCaseExecutor.Callback<GetLeafNoteByIdUseCase.OutputValues> {
+            override fun onComplete(response: GetLeafNoteByIdUseCase.OutputValues?) {
+                val output = response!!.leafNote
+                view.setTitleText(output.title)
+                view.setBodytext(output.description)
+            }
+        })
     }
 
 }

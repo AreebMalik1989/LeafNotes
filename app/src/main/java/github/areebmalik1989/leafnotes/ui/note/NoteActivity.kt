@@ -18,7 +18,7 @@ class NoteActivity : BaseActivity() {
 
         setTitle(R.string.edit_note)
 
-        val id = intent.getLongExtra(NoteConstants.idKey, -1L)
+        val id = intent.getLongExtra(NoteConstants.ID_KEY, -1L)
 
         presenter = NotePresenter(this, fragment, Identity(id))
     }

@@ -16,10 +16,14 @@ class MainActivity : BaseActivity() {
     private lateinit var presenter : MainContract.Presenter
     private lateinit var fragment : MainFragment
 
+    override fun onResume() {
+        super.onResume()
+
+        presenter = MainPresenter(this, fragment)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        presenter = MainPresenter(fragment)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -47,6 +51,7 @@ class MainActivity : BaseActivity() {
     @NonNull
     override fun createInitialFragment(): Fragment {
         fragment = MainFragment.getInstance()
+        presenter = MainPresenter(this, fragment)
         return fragment
     }
 
