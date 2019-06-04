@@ -9,6 +9,7 @@ import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import github.areebmalik1989.leafnotes.R
 import github.areebmalik1989.leafnotes.ui.BaseActivity
+import github.areebmalik1989.leafnotes.ui.about.AboutActivity
 import github.areebmalik1989.leafnotes.ui.note.NoteActivity
 
 class MainActivity : BaseActivity() {
@@ -22,10 +23,6 @@ class MainActivity : BaseActivity() {
         presenter = MainPresenter(this, fragment)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
@@ -34,8 +31,15 @@ class MainActivity : BaseActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
         when(item?.itemId) {
+
             R.id.new_note -> {
                 val intent = Intent(this@MainActivity, NoteActivity::class.java)
+                startActivity(intent)
+                return true
+            }
+
+            R.id.about -> {
+                val intent = Intent(this@MainActivity, AboutActivity::class.java)
                 startActivity(intent)
                 return true
             }
