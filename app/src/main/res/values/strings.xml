@@ -9,4 +9,9 @@
     <string name="new_note">New Note</string>
     <string name="save_note">Save Note</string>
     <string name="delete_note">Delete Note</string>
+    <string name="about">About</string>
+    <string name="developer">Areeb Malik</string>
+    <string name="app_version">v1.0</string>
+    <string name="contact">areeb.malik1989@gmail.com</string>
+    <string name="info">Info</string>
 </resources>
