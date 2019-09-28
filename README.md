@@ -1,5 +1,10 @@
+![Leaf Note Title Image](/images/Title.png)
+
 # LeafNotes
 Clean Architecture based Android app for taking notes
+
+### Credits
+Icons & logo designs : [Zularizal](https://github.com/zularizal)
 
 ### License
 
