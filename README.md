@@ -1,5 +1,5 @@
 # LeafNotes
-Android app for taking notes
+Clean Architecture based Android app for taking notes
 
 ### License
 
