@@ -13,7 +13,7 @@
         <ImageView
                 android:id="@+id/aboutImageView"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_event_note_512dp"
+                android:src="@drawable/Icon_light"
                 android:layout_marginTop="50dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="100dp"
