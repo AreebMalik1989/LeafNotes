@@ -1,3 +1,5 @@
+![Leaf Note Title Image](/images/Title.png)
+
 # LeafNotes
 Clean Architecture based Android app for taking notes
 
